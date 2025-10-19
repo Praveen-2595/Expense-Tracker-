@@ -12,15 +12,20 @@ int t;
 string temp;
 
 // global dcl
-
-// should have used class or struct :)
-string remark;
-string date;
-string Time;
-double amount;
-string category;
 int count;
-string id;
+
+struct ET
+{
+    string id;
+    string date;
+    string Time;
+    string category;
+    string remark; 
+    double amount;
+};
+
+ET e;
+
 
 int idTOcount()
 {
@@ -57,7 +62,7 @@ int idTOcount()
 
 // add expense function
 int addE()
-{ 
+{  
 
     // to store current time automaticaly
 
@@ -80,33 +85,33 @@ int addE()
     datestream << put_time(localTime, "%Y-%m-%d");
     timestream << put_time(localTime, "%H-%M-%S");
 
-    date = datestream.str();
-    Time = timestream.str();
+    e.date = datestream.str();
+    e.Time = timestream.str();
 
-    cout << "Date is set to current date: " << date << endl;
+    cout << "Date is set to current date: " << e.date << endl;
 
-    cout << "Time is set to current local time: " << Time << endl;
+    cout << "Time is set to current local time: " << e.Time << endl;
 
     cout << "Enter category(one word)" << endl;
-    cin >> category;
+    cin >> e.category;
 
     cin.ignore();
     cout << "enter remark / name " << endl;
-    getline(cin, remark);
+    getline(cin, e.remark);
 
     cout << "Enter Amount" << endl;
-    cin >> amount;
+    cin >> e.amount;
 
     // to make id continious even after restarting our program
 
     count++;
 
-    id = to_string(count);
+    e.id = to_string(count);
 
     cout << "creating Id...." << endl
-         << id << endl;
+         << e.id << endl;
 
-    file << id << "," << date << "," << Time << "," << category << "," << remark << "," << amount << endl;
+    file << e.id << "," << e.date << "," << e.Time << "," <<e.category << "," << e.remark << "," << e.amount << endl;
 
     cout << " saving and exiting..." << endl;
     file.close();
@@ -222,26 +227,26 @@ int edel()
 
         // storing values in their respective variables
 
-        getline(ss, id, ',');
-        getline(ss, date, ',');
-        getline(ss, Time, ',');
-        getline(ss, category, ',');
-        getline(ss, remark, ',');
+        getline(ss, e.id, ',');
+        getline(ss, e.date, ',');
+        getline(ss, e.Time, ',');
+        getline(ss, e.category, ',');
+        getline(ss, e.remark, ',');
         getline(ss, amountStr, ',');
 
-        if (id == userid)
+        if (e.id == userid)
         {
             if (!found)
             {
-                amount = stod(amountStr);
+                e.amount = stod(amountStr);
                 cout << string(85, '-') << endl;
                 cout << left
-                     << setw(15) << id
-                     << setw(15) << date
-                     << setw(15) << Time
-                     << setw(15) << category
-                     << setw(15) << remark
-                     << setw(15) << amount
+                     << setw(15) << e.id
+                     << setw(15) << e.date
+                     << setw(15) << e.Time
+                     << setw(15) << e.category
+                     << setw(15) << e.remark
+                     << setw(15) << e.amount
                      << endl;
 
                 cout << string(85, '-') << endl;
@@ -261,14 +266,14 @@ int edel()
             case 1:
             {
                 cout << "enter to record" << endl;
-                cin >> category;
+                cin >> e.category;
 
                 break;
             }
             case 2:
             {
                 cout << "enter to record" << endl;
-                cin >> remark;
+                cin >> e.remark;
 
                 break;
             }
@@ -297,7 +302,7 @@ int edel()
             cout << "id doesn't exist\n";
         }
 
-        tempfile << id << "," << date << "," << Time << "," << category << "," << remark << "," << amountStr << endl;
+        tempfile << e.id << "," << e.date << "," <<e. Time << "," <<e. category << "," <<e. remark << "," << amountStr << endl;
     }
 
     file.close();
@@ -351,18 +356,18 @@ int searchf()
 
         // storing values in their respective variables
 
-        getline(ss, id, ',');
-        getline(ss, date, ',');
-        getline(ss, Time, ',');
-        getline(ss, category, ',');
-        getline(ss, remark, ',');
+        getline(ss, e.id, ',');
+        getline(ss, e.date, ',');
+        getline(ss, e.Time, ',');
+        getline(ss, e.category, ',');
+        getline(ss, e.remark, ',');
         getline(ss, amountStr, ',');
 
-        if (category == userCat)
+        if (e.category == userCat)
         {
             found = true;
 
-            amount = stod(amountStr);
+            e.amount = stod(amountStr);
 
             if (!printed)
             {
@@ -381,12 +386,12 @@ int searchf()
 
             cout << string(85, '-') << endl;
             cout << left
-                 << setw(15) << id
-                 << setw(15) << date
-                 << setw(15) << Time
-                 << setw(15) << category
-                 << setw(15) << remark
-                 << setw(15) << amount
+                 << setw(15) << e.id
+                 << setw(15) << e.date
+                 << setw(15) << e.Time
+                 << setw(15) << e.category
+                 << setw(15) << e.remark
+                 << setw(15) << e.amount
                  << endl;
 
             cout << string(85, '-') << endl;
